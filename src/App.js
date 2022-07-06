@@ -1,24 +1,26 @@
-import logo from './logo.svg';
-import './App.css';
+import { useEffect, useState } from "react";
+
+import Header from "./components/Header/Header"
+import Body from "./components/Body/Body"
+import Footer from "./components/Footer/Footer"
+
+const counterInitialValue = parseInt(localStorage.getItem("counter")) || 0
 
 function App() {
+  const [counter, setCounter] = useState(counterInitialValue)
+
+  const sefiProp = "Cómo mola tu camisa"
+
+  useEffect(() => {
+    localStorage.setItem("counter", counter)
+  },[counter])
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+      <Header counterInitialValue={counterInitialValue} counter={counter} setCounter={setCounter} />
+      <Body sefiProp={sefiProp} />
+      <Footer counter={counter} />
+    </>
   );
 }
 
